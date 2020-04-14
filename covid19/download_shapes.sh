@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is for mass downloading Brazilian States shapefiles, subdivided by municipality, from the Brazilian Institute of Geography and Statistics
+
 for i in $(cat estados)
 do
 

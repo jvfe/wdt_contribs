@@ -1,10 +1,7 @@
-# %%
 from wikidata2df import wikidata2df
 from pyshex import ShExEvaluator
 from rdflib import Graph
 from tqdm import tqdm
-
-# %%
 
 
 def validate_items(schema, sparql):
@@ -32,12 +29,3 @@ def validate_items(schema, sparql):
         results.append([item, shex_result["result"], shex_result["reason"]])
 
     return results
-
-
-# %%
-sparql = "SELECT * WHERE { ?item wdt:P31 wd:Q189118 .} LIMIT 20"
-
-with open("../shex/cell_type.sx") as shex_file:
-    schema = shex_file.read()
-
-cell_types = validate_items(schema, sparql)

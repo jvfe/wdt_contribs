@@ -20,14 +20,14 @@ def get_wikidata_complexes():
 
 
 @lru_cache(maxsize=None)
-def get_wikidata_species(ncbi_tax_id):
+def get_wikidata_item_by_propertyvalue(property, value):
 
     query_result = wdi_core.WDItemEngine.execute_sparql_query(
-        f'SELECT distinct ?item WHERE {{ ?item wdt:P685 "{ncbi_tax_id}" }}'
+        f'SELECT distinct ?item WHERE {{ ?item wdt:{property} "{value}" }}'
     )
     try:
         match = query_result["results"]["bindings"][0]
-    except ValueError:
+    except IndexError:
         raise Exception("Couldn't find item for this tax id")
     qid = match["item"]["value"]
 
@@ -76,5 +76,14 @@ def return_missing_from_wikidata(complexp_dataframe):
     missing_from_wikidata = merged_data[merged_data["_merge"] == "right_only"][
         complexp_dataframe.columns
     ]
+    keep = [
+        "#Complex ac",
+        "Recommended name",
+        "Taxonomy identifier",
+        "Identifiers (and stoichiometry) of molecules in complex",
+        "Description",
+    ]
+
+    missing_from_wikidata = missing_from_wikidata[keep]
 
     return missing_from_wikidata

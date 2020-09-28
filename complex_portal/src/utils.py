@@ -1,5 +1,4 @@
-from wikidataintegrator import wdi_core
-from wikidata2df import wikidata2df
+from wikidataintegrator.wdi_core import WDItemEngine
 from collections import defaultdict
 from functools import lru_cache, reduce
 from ftplib import FTP
@@ -7,6 +6,7 @@ import pandas as pd
 
 
 def get_wikidata_complexes():
+    """Gets all Wikidata items with a Complex Portal ID property"""
 
     get_macromolecular = """
     SELECT ?item ?ComplexPortalID
@@ -14,21 +14,30 @@ def get_wikidata_complexes():
     {
     ?item wdt:P7718 ?ComplexPortalID .
     }"""
-    wikidata_complexes = wikidata2df(get_macromolecular)
+    wikidata_complexes = WDItemEngine.execute_sparql_query(
+        get_macromolecular, as_dataframe=True
+    ).replace({"http://www.wikidata.org/entity/": ""}, regex=True)
 
     return wikidata_complexes
 
 
 @lru_cache(maxsize=None)
 def get_wikidata_item_by_propertyvalue(property, value):
+    """Gets a Wikidata item for a determined property-value pair
 
-    query_result = wdi_core.WDItemEngine.execute_sparql_query(
+    Args:
+        property (str): The property to search
+        value (str): The value of said property
+    """
+
+    query_result = WDItemEngine.execute_sparql_query(
         f'SELECT distinct ?item WHERE {{ ?item wdt:{property} "{value}" }}'
     )
     try:
         match = query_result["results"]["bindings"][0]
     except IndexError:
-        raise Exception("Couldn't find item for this tax id")
+        print(f"Couldn't find item for {value}")
+        return pd.np.NaN
     qid = match["item"]["value"]
 
     qid = qid.split("/")[4]
@@ -36,7 +45,10 @@ def get_wikidata_item_by_propertyvalue(property, value):
 
 
 def get_complex_portal_datasets():
+    """Gets a dictionary of Complex portal datasets
 
+    Returns a dictionary of species as keys and dataset url as values.
+    """
     domain = "ftp.ebi.ac.uk"
     complex_data = "pub/databases/intact/complex/current/complextab/"
 
@@ -62,7 +74,11 @@ def get_complex_portal_datasets():
 
 
 def return_missing_from_wikidata(complexp_dataframe):
+    """Merges dataset with the dataframe from get_wikidata_complexes
 
+    This merge will return only complex portal entities that seemingly
+    don't have wikidata equivalents.
+    """
     wikidata_complexes = get_wikidata_complexes()
 
     merged_data = pd.merge(
@@ -79,6 +95,7 @@ def return_missing_from_wikidata(complexp_dataframe):
     keep = [
         "#Complex ac",
         "Recommended name",
+        "Aliases for complex",
         "Taxonomy identifier",
         "Identifiers (and stoichiometry) of molecules in complex",
         "Description",

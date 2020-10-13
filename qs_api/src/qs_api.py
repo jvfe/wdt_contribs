@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def send_quickstatements(username, api_token, commands, batchname, format="v1"):
+def send_quickstatements(username, api_token, commands, batchname, cmd_format="v1"):
     """
     Upload QuickStatements commands via the QS API
 
@@ -15,7 +15,7 @@ def send_quickstatements(username, api_token, commands, batchname, format="v1"):
             <https://quickstatements.toolforge.org/#/user> (If you're logged in).
         commands (str): QuickStatements commands.
         batchname (str): Name of the batch.
-        format (str): One of either 'v1' or 'csv', specifying which syntax the
+        cmd_format (str): One of either 'v1' or 'csv', specifying which syntax the
             QS commands are using. Defaults to v1.
 
     """
@@ -25,7 +25,7 @@ def send_quickstatements(username, api_token, commands, batchname, format="v1"):
         "submit": "1",
         "username": username,
         "token": api_token,
-        "format": "v1",
+        "format": cmd_format,
         "data": commands,
         "batchname": batchname,
     }

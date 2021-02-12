@@ -1,0 +1,11 @@
+Q101043457|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q41044410|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q88401514|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q47116997|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q91045423|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q90164250|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q44615668|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q59812986|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q59166361|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q101029256|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11
+Q59093911|P1416|Q105465464|S854|"https://bioinfo.imd.ufrn.br/index.php?page=people"|S813|+2021-02-12T00:00:00Z/11

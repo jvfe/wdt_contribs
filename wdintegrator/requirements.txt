@@ -79,7 +79,7 @@ pydot==1.4.1
 Pygments==2.7.4
 pygtrie==2.3.2
 PyJSG==0.10.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.5.3
 pyparsing==2.4.7
 pyrsistent==0.16.0
